@@ -1,1 +1,74 @@
-// TODO
+.container{
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-top: 5rem;
+
+  .postItem{
+    width: 700;
+    height: 6.75rem;
+    h1{
+      margin-bottom: 0.25rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+
+      transition: color 0.2s;
+    }
+
+    p{
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--post-description);
+      margin-top: 0.5rem;
+    }
+    
+    .infos{
+      width: 18.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.25rem;
+
+      .infosItem{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--post-infos);
+        p{
+          font-size: 0.857rem;
+          font-weight: 400;
+        }
+        svg{
+          width: 20px;
+          height: 20px;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    & + .postItem{
+      margin-top: 3rem;
+    }
+    cursor: pointer;
+    &:hover{
+      h1{
+        color: var(--more-posts);
+      }
+
+    }
+  }
+
+  .morePosts{
+    border: none;
+    background-color: transparent;
+    margin-top: 4.125rem;
+    color: var(--more-posts);
+    font-weight: 600;
+    font-size: 1.125rem;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+

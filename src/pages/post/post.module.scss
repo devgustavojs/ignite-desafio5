@@ -1,1 +1,60 @@
-// TODO
+.postMain{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  img{
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  article{
+    max-width: 1120px;
+    min-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    h1{
+      color: var(--post-title);
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .postInfos{
+      display: flex;
+      margin-top: 1.5rem;
+      color: var(--post-infos);
+
+      .infoItem{
+        display: flex;
+        margin-right: 1.5rem;
+        svg{
+          width: 20px;
+          height: 20px;
+          margin-right: 0.625rem;
+        }
+      }
+    }
+    .postContent{
+      max-width: 1120px;
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+
+      h2{
+        margin-bottom: 2rem;
+        font-size: 2.25rem;
+        font-weight: 700;
+      }
+
+      p{
+        font-size: 1.125rem;
+        font-weight: 400;
+        margin-bottom: 1.575rem;
+        color: var(--post-description);
+      }
+      
+      strong{
+        color: var(--more-posts)
+      }
+    }
+  }
+}

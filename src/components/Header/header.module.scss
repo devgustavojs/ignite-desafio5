@@ -1,1 +1,11 @@
-// TODO
+.headerDiv{
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 5rem;
+
+  img{
+    margin-left: 10rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+  }
+}
