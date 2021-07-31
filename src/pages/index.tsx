@@ -112,17 +112,6 @@ export default function Home(props:HomeProps) {
       pageSize: 1,
     }) 
 
-    const posts = postsResponse.results.map(post => {
-      return {
-        uid: post.uid,
-        data: {
-          title: post.data.title,
-          subtitle: post.data.subtitle,
-          author: post.data.author,
-        },
-        first_publication_date: 1
-      }
-    });
     return {
       props:{
         postsPagination: {
