@@ -143,7 +143,7 @@ export default function Post({post, nextPost, prevPost, preview, previewData,  .
     })
     
    return{
-    paths: [{params: {slug: posts.results[0].uid}}, {params: {slug: posts.results[1].uid}}, {params: {slug: posts.results[2].uid}}],
+    paths: [{params: {slug: posts.results[0].uid}}, {params: {slug: posts.results[1].uid}},],
     fallback: true
   }
 }
