@@ -1,5 +1,10 @@
-import { Document } from '@prismicio/client/types/documents';
 import Prismic from '@prismicio/client';
+
+import { Document } from '@prismicio/client/types/documents';
+import { getPrismicClient } from '../../services/prismic';
+
+const Client = getPrismicClient;
+
 
 function linkResolver(doc: Document): string {
   if (doc.type === 'posts') {
@@ -9,10 +14,8 @@ function linkResolver(doc: Document): string {
 }
 
 export default async (req, res) => {
-
-
   const { token: ref, documentId } = req.query;
-  const redirectUrl = await Prismic.client(req)
+  const redirectUrl = await Client(req)
     .getPreviewResolver(ref, documentId)
     .resolve(linkResolver, '/');
 

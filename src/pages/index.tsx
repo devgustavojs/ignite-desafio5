@@ -13,6 +13,8 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useState } from 'react';
 
+import ExitPreviewButton from '../components/ExitPreviewButton';
+
 interface Post {
   uid?: string;
   first_publication_date: string | null;
@@ -30,6 +32,8 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
+  previewData: any;
 }
 
 interface Next_Page_Response extends Response{
@@ -99,17 +103,20 @@ export default function Home(props:HomeProps) {
       })}
     {nextPage ? <button className={styles.morePosts} onClick={handleNextPage}>Carregar mais posts</button> : '' }
     </div>
+    {props.preview ? <ExitPreviewButton /> : ''}
     </>
   )
 }
 
- export const getStaticProps : GetStaticProps = async () => {
+ export const getStaticProps : GetStaticProps = async ({preview = false, previewData}) => {
+  
   const prismic = getPrismicClient();
   const postsResponse = await prismic.query([
     Prismic.predicates.at('document.type', 'posts')], 
     {
       fetch: ['posts.title','posts.subtitle', 'posts.author', 'posts.banner', 'posts.content'], 
       pageSize: 1,
+      ref: previewData?.ref ?? null
     }) 
 
     return {
@@ -117,7 +124,9 @@ export default function Home(props:HomeProps) {
         postsPagination: {
           next_page: postsResponse.next_page,
           results: postsResponse.results
-        }
+        },
+        preview
+        
       },
       redirect: 60 * 60 * 24, //24 Horas
     };

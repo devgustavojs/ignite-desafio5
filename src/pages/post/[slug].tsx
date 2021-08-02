@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR/index';
 import { useUtterances } from './useUtterances';
+import ExitPreviewButton from '../../components/ExitPreviewButton';
 
 interface Post {
   first_publication_date: string | null;
@@ -40,6 +41,8 @@ interface PostProps {
   post: Post;
   nextPost: Post;
   prevPost: Post;
+  preview: boolean;
+  previewData: any;
 }
 
 const Comments = (props) =>{
@@ -51,7 +54,7 @@ const Comments = (props) =>{
 }
 
 
-export default function Post({post, nextPost, prevPost,  ...props} : PostProps) {
+export default function Post({post, nextPost, prevPost, preview, previewData,  ...props} : PostProps) {
   const router = useRouter();
 
   function getReadingTimeReduce(content){
@@ -125,6 +128,7 @@ export default function Post({post, nextPost, prevPost,  ...props} : PostProps) 
 
         <Comments uid={post.uid} />
     </main>
+    {preview ? <ExitPreviewButton /> : ''}
     </>
   )
 }
@@ -145,9 +149,10 @@ export default function Post({post, nextPost, prevPost,  ...props} : PostProps) 
 }
 
 
- export const getStaticProps : GetStaticProps = async ({params}) => {
+ export const getStaticProps : GetStaticProps = async ({preview = false, previewData, params}) => {
+  const ref = previewData ? previewData.ref : null;
   const prismic = getPrismicClient();
-  const response = await prismic.getByUID('posts', String(params.slug) , {});
+  const response = await prismic.getByUID("posts", String(params.slug), {ref});
 
   const post: Post = {
     data: {
@@ -188,7 +193,9 @@ export default function Post({post, nextPost, prevPost,  ...props} : PostProps) 
     props: { 
       post,
       nextPost,
-      prevPost
+      prevPost,
+      preview,
+      previewData
     } 
   }
  }
